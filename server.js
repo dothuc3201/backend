@@ -1,0 +1,21 @@
+const express = require('express');
+const path = require('path');
+const {sequelize} = require('./models')
+const {rootRouter} = require('./routers');
+const app = express();
+
+app.use(express.json());
+
+app.use( express.static(path.join(__dirname, './public')));
+
+app.use('/api', rootRouter);  
+
+app.listen(3002, async () => {
+    console.log(`Example app listening at http://localhost:3002`);
+    try {
+        await sequelize.authenticate();
+        console.log('Connection has been established successfully.');
+      } catch (error) {
+        console.error('Unable to connect to the database:', error);
+      }
+  })
