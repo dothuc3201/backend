@@ -9,10 +9,12 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "async-request": "^1.2.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mariadb": "^2.5.5",
+    "multer": "^1.4.3",
     "nodemon": "^2.0.14",
     "sequelize": "^6.9.0"
   },
