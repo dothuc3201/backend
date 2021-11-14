@@ -71,7 +71,11 @@ const createHouse = async (req, res) => {
 }
 
 const getList = async (req, res) => {
-    const houses = await House.findAll();
+    const houses = await House.findAll({
+        order:[
+            ['createdAt', 'DESC']
+        ]
+    });
     const listHouse = [];
     for (let i=0; i<houses.length; i++){
         const address = await getAddress(houses[i]);
@@ -83,6 +87,7 @@ const getList = async (req, res) => {
         listHouse.push({house:houses[i], address, image: houseImage.image})
     }
     //const address = houses.map( await getAddress)
+    console.log(listHouse);
     res.status(200).send(listHouse);
 }
 
@@ -102,6 +107,7 @@ const getHouseDetail = async (req, res) => {
             house_id : req.params.id
         }
     });
+    console.log({house});
     const address = await getAddress(house);
     res.status(200).send({house,address, description: houseDetail.description, image: houseImage.image});
 }
